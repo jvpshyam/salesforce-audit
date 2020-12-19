@@ -44,8 +44,8 @@ public class AuditLogsResource {
         return auditLogs;
     }
 
-    @GetMapping("/date")
-    public List<AuditLogs> getAuditLogsByDate(@RequestParam("date") String date /*, @RequestParam("endDate") String endDate*/) {
+    @GetMapping("/date/{date}")
+    public List<AuditLogs> getAuditLogsByDate(@PathVariable("date") String date /*, @RequestParam("endDate") String endDate*/) {
         String startDate = date+"T00:00:00.000+0000";
         logger.info("Query param startDate ####### " + startDate );
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
