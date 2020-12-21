@@ -65,8 +65,19 @@ public class AuditLogsResource {
         return optionalAuditLogs;
     }
 
+    @PostMapping("/save/all")
+    public void saveAuditLogs(@RequestBody List<AuditLogs> auditLogs) {
+        AuditLogs dbAuditLogs = null;
+        if(auditLogs!=null && !auditLogs.isEmpty()) {
+            for(AuditLogs logs : auditLogs) {
+                logger.info(" ###### AuditLogs saveAuditLogs #### " + logs);
+                dbAuditLogs = auditLogsRepository.save(logs);
+            }
+        }
+    }
+
     @PostMapping("/save")
-    public AuditLogs saveAuditLogs(@RequestBody AuditLogs auditLogs) {
+    public AuditLogs saveAuditLog(@RequestBody AuditLogs auditLogs) {
         AuditLogs dbAuditLogs = auditLogsRepository.save(auditLogs);
         return dbAuditLogs;
     }
