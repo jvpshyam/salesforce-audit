@@ -71,7 +71,12 @@ public class AuditLogsResource {
         if(auditLogs!=null && !auditLogs.isEmpty()) {
             for(AuditLogs logs : auditLogs) {
                 logger.info(" ###### AuditLogs saveAuditLogs #### " + logs);
-                dbAuditLogs = auditLogsRepository.save(logs);
+                try {
+                    dbAuditLogs = auditLogsRepository.save(logs);
+                }catch(Exception e){
+                    logger.info(" #### Exception for record ##### " + logs.getId());
+                    logger.info(" #### Exception message #### "+ e.getMessage());
+                }
             }
         }
     }
